@@ -41,9 +41,12 @@ dependencies:
   #store data
   shared_preferences: ^2.2.2
 
-  #state management
-  flutter_bloc: ^8.1.4
-  equatable: ^2.0.5
+
+  #alarm noti
+  flutter_local_notifications: ^17.0.0
+
+  #local timezone
+  flutter_timezone: ^1.0.8
 
 dev_dependencies:
   flutter_test:

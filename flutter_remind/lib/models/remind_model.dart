@@ -1,4 +1,4 @@
-
+import 'package:intl/intl.dart';
 class AlarmModel {
   String? notifytime;
   String? twentyfourhour;
@@ -12,6 +12,7 @@ class AlarmModel {
   int? alarmid;
   int? notificationId;
   String? remindLabal;
+  DateTime? customOnce;
 
   AlarmModel(
       {
@@ -26,10 +27,13 @@ class AlarmModel {
       this.sunday,
       this.alarmid,
       this.notificationId,
-      this.remindLabal});
+      this.remindLabal,
+      this.customOnce});
    AlarmModel.fromJson(Map<String, dynamic> json) {
     notifytime = json['notifytime'];
-    twentyfourhour=json['notifytime'] != null ? convertTo24HourFormat(json['notifytime']) : null;
+    twentyfourhour = json['notifytime'] != null
+        ? convertTo24HourFormat(json['notifytime'])
+        : null;
     monday = json['Monday'];
     tuesday = json['Tueday'];
     wednesday = json['Wednesday'];
@@ -39,11 +43,14 @@ class AlarmModel {
     sunday = json['Sunday'];
     alarmid = json['alarmid'];
     notificationId = json['NotificationId'];
-    remindLabal=json['Labal'] ?? '';
+    remindLabal = json['Labal'] ?? '';
+    customOnce = json['CustomOnce'] != null
+        ? DateFormat("yyyy-MM-dd HH:mm:ss").parse(json['CustomOnce'])
+        : json['CustomOnce'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  {};
+    final Map<String, dynamic> data = {};
     data['notifytime'] = notifytime;
     data['Monday'] = monday;
     data['Tueday'] = tuesday;
@@ -55,6 +62,9 @@ class AlarmModel {
     data['alarmid'] = alarmid;
     data['NotificationId'] = notificationId;
     data['Labal'] = remindLabal;
+    data['CustomOnce'] = customOnce != null
+        ? DateFormat("yyyy-MM-dd HH:mm:ss").format(customOnce!)
+        : customOnce;
     return data;
   }
 }
